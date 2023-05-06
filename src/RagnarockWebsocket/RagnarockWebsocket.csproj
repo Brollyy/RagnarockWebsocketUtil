@@ -13,6 +13,7 @@
     <Description>NuGet package for handling communication with Ragnarock VR and Vikings on Tour through a dedicated Websocket.</Description>
     <PackageReleaseNotes>1.0.0
 - Support for the BETA version of the Websocket available in Ragnarock patch 1.8.</PackageReleaseNotes>
+    <Version>0.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
