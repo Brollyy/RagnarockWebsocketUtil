@@ -2,7 +2,7 @@
 
 NuGet package for handling communication with Ragnarock VR and Vikings on Tour through a dedicated Websocket.
 
-Documentation provided by WanaDev - [WebSocket (BETA)](https://www.notion.so/WebSocket-BETA-30cdc789baa44b899d161bcbd128227d?pvs=4). 
+Documentation provided by WanaDev - [WebSocket (BETA)](https://wanadev.notion.site/WebSocket-BETA-30cdc789baa44b899d161bcbd128227d). 
 It describes how the connection setup should be done from the game's side, which is a requirement to use this library in practice.
 
 ## Server vs. Client
@@ -22,10 +22,10 @@ using RagnarockWebsocket;
 using RagnarockWebsocket.Enums;
 
 // Server connection.
-RagnaWS serverSocket = new RagnaWS(new Uri("http://localhost:8083/"), ConnectionMode.Server);  // Equivalent to new RagnaWS(), using the default values from Wanadev documentation.
+RagnaWS serverSocket = new RagnaWS("http://localhost:8083/", ConnectionMode.Server);  // Equivalent to new RagnaWS(), using the default values from Wanadev documentation.
 
 // Client connection
-RagnaWS clientSocket = new RagnaWS(new Uri("ws://localhost:8083/"), ConnectionMode.Client);
+RagnaWS clientSocket = new RagnaWS("ws://localhost:8083/", ConnectionMode.Client);
 ```
 
 With server connection, after initializing, the listener connection is kept until the socket object is disposed of, so restarting the song in Ragnarock will re-establish the connection.
@@ -86,6 +86,9 @@ socket.Disconnected += () => {
 socket.Message += (eventName, data) => {
     Console.WriteLine($"Received event {eventName} with data {data}.");
 }
+
+// Received event ragnarockInitConnection with data connected.
+// Received event DrumHit with data {hand: "Left", intensity: 0.75}.
 ```
 
 </td>
@@ -100,6 +103,9 @@ socket.Message += (eventName, data) => {
 socket.DrumHit += (data) => {
     Console.WriteLine($"Drum hit with {data.hand} hand at {data.intensity} intensity.");
 }
+
+// Drum hit with Left hand at 0.0123 intensity.
+// Drum hit with Right hand at 0.75 intensity.
 ```
 
 </td>
@@ -114,6 +120,9 @@ socket.DrumHit += (data) => {
 socket.BeatHit += (data) => {
     Console.WriteLine($"Note hit at {data.time} beat with {1000 * data.delta}ms latency.");
 }
+
+// Note hit at 120.0 beat with 4.024ms latency.
+// Note hit at 120.0499667 beat with -0.241ms latency.
 ```
 
 </td>
@@ -125,9 +134,12 @@ socket.BeatHit += (data) => {
 			<td>
 
 ```csharp
-socket.BeatHit += (data) => {
+socket.BeatMiss += (data) => {
     Console.WriteLine($"Note missed at {data.time} beat.");
 }
+
+// Note missed at 120.0 beat.
+// Note missed at 120.0499667 beat.
 ```
 
 </td>
@@ -142,6 +154,9 @@ socket.BeatHit += (data) => {
 socket.ComboTriggered += (data) => {
     Console.WriteLine($"{data.level} combo triggered.");
 }
+
+// Yellow combo triggered.
+// Blue combo triggered.
 ```
 
 </td>
@@ -156,6 +171,10 @@ socket.ComboTriggered += (data) => {
 socket.ComboLost += (data) => {
     Console.WriteLine($"{data.GetLostAtLevel()} combo lost at {data.lostAt}.");
 }
+
+// Blue combo lost at 0.650041.
+// Yellow combo lost at 1.012343.
+// Yellow combo lost at 2.501231.
 ```
 
 </td>
@@ -168,8 +187,11 @@ socket.ComboLost += (data) => {
 
 ```csharp
 socket.StartSong += (data) => {
-    Console.WriteLine($"Started playing {data.songTitle} by {data.songAuthor}.");
+    Console.WriteLine($"Started playing {data.songTitle} by {data.songArtist}.");
 }
+
+// Started playing Dewey by Celkilt.
+// Started playing Kammthar by Ultra Vomit.
 ```
 
 </td>
@@ -185,6 +207,9 @@ socket.SongInfos += (data) => {
     Console.WriteLine($"Playing {data.songTitle} by {data.songAuthor}.");
 }
 socket.CurrentSong().Wait();
+
+// Playing Dewey by Celkilt.
+// Playing Kammthar by Ultra Vomit.
 ```
 
 </td>
@@ -213,6 +238,8 @@ socket.Endsong += (data) => {
 socket.Endsong += (data) => {
     Console.WriteLine($"Traveled {data.distance}m and only missed {data.stats.missed} notes.");
 }
+
+// Traveled 1555.403809m and only missed 5 notes.
 ```
 
 </td>

@@ -40,13 +40,13 @@ namespace RagnarockWebsocket
         /// <summary>
         /// Happens when connection with Ragnarock is established.<br/>
         /// For ConnectionMode.Server mode, this should happen when song is started in Ragnarock.<br/>
-        /// For ConnectionMode.Client mode, this will happen soon after RagnarockWebsocket constructor finishes, as long as Ragnarock server is running - it's unclear right now whether Wanadev intends on keeping the server up the whole time game is running, or only when players enter the boat.
+        /// For ConnectionMode.Client mode, this will happen soon after RagnaWS constructor finishes, as long as Ragnarock server is running - it's unclear right now whether Wanadev intends on keeping the server up the whole time game is running, or only when players enter the boat.
         /// </summary>
         public event Action Connected = delegate { };
         /// <summary>
         /// Happens when connection with Ragnarock is lost.<br/>
         /// For ConnectionMode.Server mode, this should happen after player is finished with the song in game and leaves to main menu.<br/>
-        /// For ConnectionMode.Client mode, this will probably happen after game is closed or after RagnarockWebsocket is disposed.
+        /// For ConnectionMode.Client mode, this will probably happen after game is closed or after RagnaWS is disposed.
         /// </summary>
         public event Action Disconnected = delegate { };
 
@@ -61,6 +61,18 @@ namespace RagnarockWebsocket
 
         #region In → Events From the Socket to the Game
         /// <summary>
+        /// Send a custom event to the game.<br/>
+        /// This is intended to be used for undocumented/new events that are not yet implemented by this library.
+        /// </summary>
+        /// <param name="eventName">name of the custom event</param>
+        /// <param name="data">data payload</param>
+        /// <returns>Task associated with the async operation of sending the event.</returns>
+        public Task SendCustomEvent(string eventName, object data)
+        {
+            return ragnarockWebsocketConnection.SendEvent(eventName, data);
+        }
+
+        /// <summary>
         /// Displays a popup window within the game.
         /// </summary>
         /// <param name="dialogIdentifier">Unique identifier of the popup window.</param>
@@ -72,14 +84,16 @@ namespace RagnarockWebsocket
         public Task DisplayDialogPopup(string dialogIdentifier, string title, Vector3 location, string message, double duration)
         {
             // TODO: check what the dialogIdentifier can be used for - can we adjust the message after the fact, change location or duration?
-            DialogData data = new DialogData();
-            data.id = dialogIdentifier;
-            data.title = title;
-            data.locationX = location.X;
-            data.locationY = location.Y;
-            data.locationZ = location.Z;
-            data.message = message;
-            data.duration = duration;
+            DialogData data = new()
+            {
+                id = dialogIdentifier,
+                title = title,
+                locationX = location.X,
+                locationY = location.Y,
+                locationZ = location.Z,
+                message = message,
+                duration = duration
+            };
             return ragnarockWebsocketConnection.SendEvent("dialog", data);
         }
 
@@ -92,9 +106,11 @@ namespace RagnarockWebsocket
         public Task ChangeHammer(HammerHand hand, Hammer hammer)
         {
             // TODO: check what happens if player doesn't have the hammer unlocked - need help from someone else on that one.
-            HammerData data = new HammerData();
-            data.hand = hand;
-            data.hammer = hammer;
+            HammerData data = new()
+            {
+                hand = hand,
+                hammer = hammer
+            };
             return ragnarockWebsocketConnection.SendEvent("hammer", data);
         }
 
@@ -105,8 +121,10 @@ namespace RagnarockWebsocket
         /// <returns>Task associated with the async operation of sending the event.</returns>
         public Task AHOU(Rowers rowers)
         {
-            AHOUData data = new AHOUData();
-            data.rowersId = rowers;
+            AHOUData data = new()
+            {
+                rowersId = rowers
+            };
             return ragnarockWebsocketConnection.SendEvent("ahou", data);
         }
 
@@ -117,18 +135,6 @@ namespace RagnarockWebsocket
         public Task CurrentSong()
         {
             return ragnarockWebsocketConnection.SendEvent("current_song", new CurrentSongData());
-        }
-
-        /// <summary>
-        /// Send a custom event to the game.<br/>
-        /// This is intended to be used for undocumented/new events that are not yet implemented by this library.
-        /// </summary>
-        /// <param name="eventName">name of the custom event</param>
-        /// <param name="data">data payload</param>
-        /// <returns>Task associated with the async operation of sending the event.</returns>
-        public Task SendCustomEvent(string eventName, object data)
-        {
-            return ragnarockWebsocketConnection.SendEvent(eventName, data);
         }
         #endregion
 
@@ -169,7 +175,7 @@ namespace RagnarockWebsocket
         /// <summary>
         /// Happens when player uploads a score (should be right after EndSong).
         /// </summary>
-        public event Action<ScoreEventData> Score = delegate { };
+        public event Action<ScoreData> Score = delegate { };
         /// <summary>
         /// Triggered whenever any message is sent by the game.<br/>
         /// Note that events supported by this library will trigger both this and their corresponding event at the same time.<br/>
@@ -193,7 +199,7 @@ namespace RagnarockWebsocket
                 case "StartSong": StartSong?.Invoke(data.ToObject<StartSongData>()); break;
                 case "SongInfos": SongInfos?.Invoke(data.ToObject<SongInfosData>()); break;
                 case "EndSong": EndSong?.Invoke(data.ToObject<EndSongData>()); break;
-                case "Score": Score?.Invoke(data.ToObject<ScoreEventData>()); break;
+                case "Score": Score?.Invoke(data.ToObject<ScoreData>()); break;
             }
         }
 

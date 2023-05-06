@@ -9,7 +9,8 @@ namespace RagnarockWebsocket.Websocket
 {
     internal class RagnarockWebsocketClientConnection : IRagnarockWebsocketConnection
     {
-        private readonly WatsonWsClient client;
+        private readonly Uri socketURI;
+        private WatsonWsClient client;
 
         public RagnarockWebsocketClientConnection(Uri socketURI)
         {
@@ -17,8 +18,8 @@ namespace RagnarockWebsocket.Websocket
             {
                 throw new ArgumentException($"Invalid URI for WebSocket client connection: {socketURI}");
             }
-            client = new WatsonWsClient(socketURI);
-            ConnectToServer();
+            this.socketURI = socketURI;
+            client = ConnectToServer();
         }
 
         #region Connection
@@ -36,15 +37,17 @@ namespace RagnarockWebsocket.Websocket
             {
                 client.Stop();
             }
-            ConnectToServer();
+            client = ConnectToServer();
         }
 
-        private void ConnectToServer()
+        private WatsonWsClient ConnectToServer()
         {
-            client.ServerConnected += OnServerConnected;
-            client.ServerDisconnected += OnServerDisconnected;
-            client.MessageReceived += OnMessageReceived;
-            client.Start();
+            WatsonWsClient newClient = new WatsonWsClient(socketURI);
+            newClient.ServerConnected += OnServerConnected;
+            newClient.ServerDisconnected += OnServerDisconnected;
+            newClient.MessageReceived += OnMessageReceived;
+            newClient.StartAsync(); // Run this async to make sure listeners to Connected event can be registered before it actually starts.
+            return newClient;
         }
 
         private void OnServerConnected(object? sender, EventArgs args)
@@ -67,9 +70,11 @@ namespace RagnarockWebsocket.Websocket
             {
                 throw new InvalidOperationException("Websocket client is not connected to Ragnarock server!");
             }
-            EventData eventData = new EventData();
-            eventData.eventName = eventName;
-            eventData.data = data;
+            EventData eventData = new()
+            {
+                eventName = eventName,
+                data = data
+            };
             return client.SendAsync(JObject.FromObject(eventData).ToString());
         }
         #endregion

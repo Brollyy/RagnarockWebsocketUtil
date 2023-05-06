@@ -6,7 +6,7 @@ namespace RagnarockWebsocket.Data
     /// <summary>
     /// Data received from the Score event.
     /// </summary>
-    public struct ScoreEventData
+    public struct ScoreData
     {
         /// <summary>
         /// Statistics about the run - hits/misses, etc.

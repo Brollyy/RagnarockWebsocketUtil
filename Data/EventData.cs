@@ -1,4 +1,7 @@
 ﻿using Newtonsoft.Json;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("RagnarockWebsocketTest")]
 
 namespace RagnarockWebsocket.Data
 {

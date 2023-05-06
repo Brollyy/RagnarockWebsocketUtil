@@ -9,7 +9,10 @@ namespace RagnarockWebsocket.Websocket
 {
     internal class RagnarockWebsocketServerConnection : IRagnarockWebsocketConnection
     {
-        private readonly WatsonWsServer server;
+        private static readonly TimeSpan MAX_TIMEOUT = TimeSpan.FromSeconds(5);
+
+        private readonly Uri socketURI;
+        private WatsonWsServer server;
 
         public RagnarockWebsocketServerConnection(Uri socketURI)
         {
@@ -17,8 +20,8 @@ namespace RagnarockWebsocket.Websocket
             {
                 throw new ArgumentException($"Invalid URI for WebSocket server to start: {socketURI}");
             }
-            server = new WatsonWsServer(socketURI);
-            StartServer();
+            this.socketURI = socketURI;
+            server = StartServer();
         }
 
         #region Connection
@@ -36,15 +39,17 @@ namespace RagnarockWebsocket.Websocket
             {
                 server.Stop();
             }
-            StartServer();
+            server = StartServer();
         }
 
-        private void StartServer()
+        private WatsonWsServer StartServer()
         {
-            server.ClientConnected += OnClientConnected;
-            server.ClientDisconnected += OnClientDisconnected;
-            server.MessageReceived += OnMessageReceived;
-            server.Start();
+            WatsonWsServer newServer = new WatsonWsServer(socketURI);
+            newServer.ClientConnected += OnClientConnected;
+            newServer.ClientDisconnected += OnClientDisconnected;
+            newServer.MessageReceived += OnMessageReceived;
+            newServer.StartAsync().Wait(MAX_TIMEOUT);
+            return newServer;
         }
 
         private void OnClientConnected(object? sender, ConnectionEventArgs args)
@@ -70,9 +75,11 @@ namespace RagnarockWebsocket.Websocket
             {
                 throw new InvalidOperationException("Ragnarock client is not connected to Websocket server!");
             }
-            EventData eventData = new EventData();
-            eventData.eventName = eventName;
-            eventData.data = data;
+            EventData eventData = new()
+            {
+                eventName = eventName,
+                data = data
+            };
             // I'm assuming only one client at a time - in this context it's reasonable, as we open this server specifically only for Ragnarock to connect.
             return server.SendAsync(
                 server.ListClients().First().Guid,
