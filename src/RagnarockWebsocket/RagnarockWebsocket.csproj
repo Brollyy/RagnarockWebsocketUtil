@@ -4,7 +4,26 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Title>Ragnarock Websocket</Title>
+    <Authors>Brollyy</Authors>
+    <PackageProjectUrl>https://github.com/Brollyy/RagnarockWebsocketUtil</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/Brollyy/RagnarockWebsocketUtil</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Description>NuGet package for handling communication with Ragnarock VR and Vikings on Tour through a dedicated Websocket.</Description>
+    <PackageReleaseNotes>Support for the BETA version of the Websocket available in Ragnarock patch 1.8.</PackageReleaseNotes>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
