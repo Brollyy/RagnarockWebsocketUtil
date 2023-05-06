@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RagnarockWebsocket", "RagnarockWebsocket.csproj", "{CF5D6111-6189-4870-96B6-0F33C275A320}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RagnarockWebsocket", "RagnarockWebsocket\RagnarockWebsocket.csproj", "{CF5D6111-6189-4870-96B6-0F33C275A320}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RagnarockWebsocketTest", "..\RagnarockWebsocketUtilTest\RagnarockWebsocketTest.csproj", "{2C3E531F-2BDB-45D0-AA26-409A0E14ECCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RagnarockWebsocketTest", "RagnarockWebsocketTest\RagnarockWebsocketTest.csproj", "{2C3E531F-2BDB-45D0-AA26-409A0E14ECCE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestServer", "..\TestServer\TestServer.csproj", "{C707715C-A1BA-4190-9A5B-FE607DAF6DBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestServer", "TestServer\TestServer.csproj", "{C707715C-A1BA-4190-9A5B-FE607DAF6DBA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
