@@ -11,7 +11,8 @@
     <RepositoryUrl>https://github.com/Brollyy/RagnarockWebsocketUtil</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>NuGet package for handling communication with Ragnarock VR and Vikings on Tour through a dedicated Websocket.</Description>
-    <PackageReleaseNotes>Support for the BETA version of the Websocket available in Ragnarock patch 1.8.</PackageReleaseNotes>
+    <PackageReleaseNotes>1.0.0
+- Support for the BETA version of the Websocket available in Ragnarock patch 1.8.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
