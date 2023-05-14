@@ -1,7 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFrameworks>net7.0;net6.0;netstandard2.1;netcoreapp3.1;net48</TargetFrameworks>
+    <LangVersion>11.0</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Title>Ragnarock Websocket</Title>
@@ -11,9 +12,9 @@
     <RepositoryUrl>https://github.com/Brollyy/RagnarockWebsocketUtil</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>NuGet package for handling communication with Ragnarock VR and Vikings on Tour through a dedicated Websocket.</Description>
-    <PackageReleaseNotes>0.1.0
-- Support for the BETA version of the Websocket available in Ragnarock patch 1.8.</PackageReleaseNotes>
-    <Version>0.1.0</Version>
+    <PackageReleaseNotes>0.1.1
+- Support for .NET 6, .NET Standard, .NET Core and .NET Framework 4.8 added.</PackageReleaseNotes>
+    <Version>0.1.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

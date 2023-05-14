@@ -4,6 +4,8 @@ using RagnarockWebsocket.Data;
 using RagnarockWebsocket.Enums;
 using RagnarockWebsocket.Websocket;
 
+namespace System.Net.Http { } // Fix for .NET Framework 4.8 issue (https://github.com/dotnet/sdk/issues/24146)
+
 namespace RagnarockWebsocket
 {
     public class RagnaWS : IDisposable

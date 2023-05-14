@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using RagnarockWebsocket.Converter;
 using RagnarockWebsocket.Enums;
+using RagnarockWebsocket.Extensions;
 
 namespace RagnarockWebsocket.Data
 {
@@ -22,7 +23,7 @@ namespace RagnarockWebsocket.Data
         /// <returns>level of the lost combo</returns>
         public readonly ComboLevel GetLostAtLevel()
         {
-            return (ComboLevel) (int) double.Clamp(2 * lostAt, 1, 2);
+            return (ComboLevel) (int) (2 * lostAt).Clamp(1, 2);
         }
     }
 }

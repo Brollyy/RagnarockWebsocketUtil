@@ -96,7 +96,7 @@ namespace RagnarockWebsocket.Websocket
             switch (args.MessageType)
             {
                 case WebSocketMessageType.Text:
-                    JObject payload = JObject.Parse(Encoding.UTF8.GetString(args.Data));
+                    JObject payload = JObject.Parse(Encoding.UTF8.GetString(args.Data.ToArray()));
                     string? eventName = (string?)payload["event"];
                     JToken? data = payload["data"];
                     if (eventName == null || data == null)

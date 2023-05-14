@@ -27,7 +27,7 @@ namespace RagnarockWebsocket.Converter
             else
             {
                 Rowers rowers = (Rowers)value;
-                writer.WriteRawValue($"[{string.Join(',', rowers.GetRagnarockIds())}]");
+                writer.WriteRawValue($"[{string.Join(",", rowers.GetRagnarockIds())}]");
             }
         }
     }

@@ -13,7 +13,7 @@ namespace RagnarockWebsocket.Converter
 
         public override object ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
-            double.TryParse((string?)reader.Value, CultureInfo.InvariantCulture, out double result);
+            double.TryParse((string?)reader.Value, NumberStyles.Float, CultureInfo.InvariantCulture, out double result);
             return result;
         }
 
