@@ -22,10 +22,10 @@ using RagnarockWebsocket;
 using RagnarockWebsocket.Enums;
 
 // Server connection.
-RagnaWS serverSocket = new RagnaWS("http://localhost:8083/", ConnectionMode.Server);  // Equivalent to new RagnaWS(), using the default values from Wanadev documentation.
+RagnaWS serverSocket = new RagnaWS("http://localhost:8033/", ConnectionMode.Server);  // Equivalent to new RagnaWS(), using the default values from Wanadev documentation.
 
 // Client connection
-RagnaWS clientSocket = new RagnaWS("ws://localhost:8083/", ConnectionMode.Client);
+RagnaWS clientSocket = new RagnaWS("ws://localhost:8033/", ConnectionMode.Client);
 ```
 
 With server connection, after initializing, the listener connection is kept until the socket object is disposed of, so restarting the song in Ragnarock will re-establish the connection.
