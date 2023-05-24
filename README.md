@@ -221,7 +221,7 @@ socket.CurrentSong().Wait();
 			<td>
 
 ```csharp
-socket.Endsong += (data) => {
+socket.EndSong += (data) => {
     Console.WriteLine("Finished playing a song.");
 }
 ```
@@ -235,7 +235,7 @@ socket.Endsong += (data) => {
 			<td>
 
 ```csharp
-socket.Endsong += (data) => {
+socket.Score += (data) => {
     Console.WriteLine($"Traveled {data.distance}m and only missed {data.stats.missed} notes.");
 }
 
