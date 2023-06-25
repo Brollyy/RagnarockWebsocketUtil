@@ -72,6 +72,10 @@
         /// <summary>
         /// Only unlockable during April event.
         /// </summary>
-        ChickenDrumstick = 16
+        ChickenDrumstick = 16,
+        /// <summary>
+        /// Play all the songs in the Sabaton RAID pack.
+        /// </summary>
+        SabatonHammer = 17
     };
 }
