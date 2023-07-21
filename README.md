@@ -7,7 +7,7 @@ It describes how the connection setup should be done from the game's side, which
 
 ## Server vs. Client
 
-Current version of Ragnarock (1.8) requires a Websocket Server for the game to connect into when a new play-session is established (player goes from main menu into the boat), 
+Current version of Ragnarock (2.1.0) requires a Websocket Server for the game to connect into when a new play-session is established (player goes from main menu into the boat), 
 but this only allows for one application using the Websocket to be running at the same time.
 
 This will most likely change in the future to allow for multiple independent applications, 

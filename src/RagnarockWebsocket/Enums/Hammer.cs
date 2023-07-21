@@ -76,6 +76,26 @@
         /// <summary>
         /// Play all the songs in the Sabaton RAID pack.
         /// </summary>
-        SabatonHammer = 17
+        SabatonHammer = 17,
+        /// <summary>
+        /// Get a bronze medal and nothing more on any song (OST only).
+        /// </summary>
+        BronzeAge = 18,
+        /// <summary>
+        /// Get a silver medal and nothing more on any song (OST only).
+        /// </summary>
+        SilverBullet = 19,
+        /// <summary>
+        /// Get a gold medal on any song (OST only).
+        /// </summary>
+        GoldDigger = 20,
+        /// <summary>
+        /// Get bronze medals on all the levels of all the songs from Volume 1.
+        /// </summary>
+        MyPretty = 21,
+        /// <summary>
+        /// Get silver medals on all the levels of all the songs from Volume 1.
+        /// </summary>
+        MyShiny = 22
     };
 }

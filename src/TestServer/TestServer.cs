@@ -35,6 +35,6 @@ while (true)
         case "hammer": socket.ChangeHammer(HammerHand.Both, (Hammer) int.Parse(commWithParams[1])).Wait(); break;
         case "dialog":
             socket.DisplayDialogPopup(commWithParams[1], commWithParams[2], new Vector3(float.Parse(commWithParams[3]), float.Parse(commWithParams[4]), float.Parse(commWithParams[5])), commWithParams[6], 10); break;
-        default: socket.SendCustomEvent("ahou", commWithParams[1]); break;
+        default: socket.SendCustomEvent("hammer", new { hand = 2, hammer = int.Parse(commWithParams[1]) }); break;
     }
 }
