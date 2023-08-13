@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace RagnarockWebsocket.Enums
+﻿namespace RagnarockWebsocketCore.Enums
 {
     /// <summary>
     /// Represents rowers on the boat.<br/>

@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
-using RagnarockWebsocket.Converter;
-using RagnarockWebsocket.Enums;
-using RagnarockWebsocket.Extensions;
+using RagnarockWebsocketCore.Converter;
+using RagnarockWebsocketCore.Enums;
+using RagnarockWebsocketCore.Extensions;
 
-namespace RagnarockWebsocket.Data
+namespace RagnarockWebsocketCore.Data
 {
     /// <summary>
     /// Data received from the ComboLost event.

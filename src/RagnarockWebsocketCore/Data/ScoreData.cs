@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
-using RagnarockWebsocket.Converter;
+using RagnarockWebsocketCore.Converter;
 
-namespace RagnarockWebsocket.Data
+namespace RagnarockWebsocketCore.Data
 {
     /// <summary>
     /// Data received from the Score event.

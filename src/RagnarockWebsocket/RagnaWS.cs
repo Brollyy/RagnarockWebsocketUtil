@@ -1,6 +1,9 @@
 ﻿using System.Numerics;
 using Newtonsoft.Json.Linq;
-using RagnarockWebsocket.Data;
+using RagnarockWebsocketCore.Data;
+using RagnarockWebsocketCore.Enums;
+using RagnarockWebsocketCore.Message;
+using RagnarockWebsocketCore.Websocket;
 using RagnarockWebsocket.Enums;
 using RagnarockWebsocket.Websocket;
 
@@ -11,6 +14,8 @@ namespace RagnarockWebsocket
     public class RagnaWS : IDisposable
     {
         private readonly IRagnarockWebsocketConnection ragnarockWebsocketConnection;
+        private readonly RagnarockMessageSender ragnarockMessageSender;
+        private readonly RagnarockMessageHandler ragnarockMessageHandler;
 
         /// <summary>
         /// Sets up the Websocket for communication in given mode (client or server).
@@ -36,6 +41,20 @@ namespace RagnarockWebsocket
             ragnarockWebsocketConnection.Connected += HandleConnected;
             ragnarockWebsocketConnection.Disconnected += HandleDisconnected;
             ragnarockWebsocketConnection.Message += HandleMessage;
+            ragnarockMessageSender = new(ragnarockWebsocketConnection);
+            ragnarockMessageHandler = new()
+            {
+                OnDrumHit = delegate (DrumHitData data) { DrumHit?.Invoke(data); },
+                OnBeatHit = delegate (BeatHitData data) { BeatHit?.Invoke(data); },
+                OnBeatMiss = delegate (BeatMissData data) { BeatMiss?.Invoke(data); },
+                OnComboTriggered = delegate (ComboTriggeredData data) { ComboTriggered?.Invoke(data); },
+                OnComboLost = delegate (ComboLostData data) { ComboLost?.Invoke(data); },
+                OnStartSong = delegate (StartSongData data) { StartSong?.Invoke(data); },
+                OnSongInfos = delegate (SongInfosData data) { SongInfos?.Invoke(data); },
+                OnEndSong = delegate (EndSongData data) {  EndSong?.Invoke(data); },
+                OnScore = delegate (ScoreData data) { Score?.Invoke(data); },
+                OnMessage = delegate (string eventName, JToken data) { Message?.Invoke(eventName, data); },
+            };
         }
 
         #region Connection
@@ -71,7 +90,7 @@ namespace RagnarockWebsocket
         /// <returns>Task associated with the async operation of sending the event.</returns>
         public Task SendCustomEvent(string eventName, object data)
         {
-            return ragnarockWebsocketConnection.SendEvent(eventName, data);
+            return ragnarockMessageSender.SendCustomEvent(eventName, data);
         }
 
         /// <summary>
@@ -85,35 +104,19 @@ namespace RagnarockWebsocket
         /// <returns>Task associated with the async operation of sending the event.</returns>
         public Task DisplayDialogPopup(string dialogIdentifier, string title, Vector3 location, string message, double duration)
         {
-            // TODO: check what the dialogIdentifier can be used for - can we adjust the message after the fact, change location or duration?
-            DialogData data = new()
-            {
-                id = dialogIdentifier,
-                title = title,
-                locationX = location.X,
-                locationY = location.Y,
-                locationZ = location.Z,
-                message = message,
-                duration = duration
-            };
-            return ragnarockWebsocketConnection.SendEvent("dialog", data);
+            return ragnarockMessageSender.DisplayDialogPopup(dialogIdentifier, title, location, message, duration);
         }
 
         /// <summary>
         /// Changes hammer for the current run in the hand(s) to the provided one.
+        /// If player haven't unlocked the indicated hammer, the default one is set instead.
         /// </summary>
         /// <param name="hand">Hand(s) to change the hammer for.</param>
         /// <param name="hammer">Hammer to change to.</param>
         /// <returns>Task associated with the async operation of sending the event.</returns>
         public Task ChangeHammer(HammerHand hand, Hammer hammer)
         {
-            // TODO: check what happens if player doesn't have the hammer unlocked - need help from someone else on that one.
-            HammerData data = new()
-            {
-                hand = hand,
-                hammer = hammer
-            };
-            return ragnarockWebsocketConnection.SendEvent("hammer", data);
+            return ragnarockMessageSender.ChangeHammer(hand, hammer);
         }
 
         /// <summary>
@@ -123,11 +126,7 @@ namespace RagnarockWebsocket
         /// <returns>Task associated with the async operation of sending the event.</returns>
         public Task AHOU(Rowers rowers)
         {
-            AHOUData data = new()
-            {
-                rowersId = rowers
-            };
-            return ragnarockWebsocketConnection.SendEvent("ahou", data);
+            return ragnarockMessageSender.AHOU(rowers);
         }
 
         /// <summary>
@@ -136,7 +135,7 @@ namespace RagnarockWebsocket
         /// <returns>Task associated with the async operation of sending the event.</returns>
         public Task CurrentSong()
         {
-            return ragnarockWebsocketConnection.SendEvent("current_song", new CurrentSongData());
+            return ragnarockMessageSender.CurrentSong();
         }
         #endregion
 
@@ -190,19 +189,7 @@ namespace RagnarockWebsocket
         #region Event listeners
         private void HandleMessage(string eventName, JToken data)
         {
-            Message?.Invoke(eventName, data);
-            switch (eventName)
-            {
-                case "DrumHit": DrumHit?.Invoke(data.ToObject<DrumHitData>()); break;
-                case "BeatHit": BeatHit?.Invoke(data.ToObject<BeatHitData>()); break;
-                case "BeatMiss": BeatMiss?.Invoke(data.ToObject<BeatMissData>()); break;
-                case "ComboTriggered": ComboTriggered?.Invoke(data.ToObject<ComboTriggeredData>()); break;
-                case "ComboLost": ComboLost?.Invoke(data.ToObject<ComboLostData>()); break;
-                case "StartSong": StartSong?.Invoke(data.ToObject<StartSongData>()); break;
-                case "SongInfos": SongInfos?.Invoke(data.ToObject<SongInfosData>()); break;
-                case "EndSong": EndSong?.Invoke(data.ToObject<EndSongData>()); break;
-                case "Score": Score?.Invoke(data.ToObject<ScoreData>()); break;
-            }
+            ragnarockMessageHandler.HandleMessage(eventName, data);
         }
 
         private void HandleConnected()

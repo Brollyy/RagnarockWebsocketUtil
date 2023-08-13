@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
-using RagnarockWebsocket.Enums;
+using RagnarockWebsocketCore.Enums;
 
-namespace RagnarockWebsocket.Data
+namespace RagnarockWebsocketCore.Data
 {
     /// <summary>
     /// Data received from the ComboTriggered event.

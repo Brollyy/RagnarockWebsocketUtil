@@ -3,7 +3,8 @@ using WatsonWebsocket;
 using System.Net.WebSockets;
 using System.Text;
 using Newtonsoft.Json;
-using RagnarockWebsocket.Data;
+using RagnarockWebsocketCore.Data;
+using RagnarockWebsocketCore.Websocket;
 
 namespace RagnarockWebsocket.Websocket
 {

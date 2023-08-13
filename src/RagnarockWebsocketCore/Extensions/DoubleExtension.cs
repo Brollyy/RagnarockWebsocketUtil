@@ -1,4 +1,4 @@
-﻿namespace RagnarockWebsocket.Extensions
+﻿namespace RagnarockWebsocketCore.Extensions
 {
     public static class DoubleExtension
     {

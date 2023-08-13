@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
-using RagnarockWebsocket.Converter;
-using RagnarockWebsocket.Enums;
+using RagnarockWebsocketCore.Converter;
+using RagnarockWebsocketCore.Enums;
 
-namespace RagnarockWebsocket.Data
+namespace RagnarockWebsocketCore.Data
 {
     internal struct AHOUData
     {

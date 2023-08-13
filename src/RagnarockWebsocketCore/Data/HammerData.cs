@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using RagnarockWebsocket.Enums;
+using RagnarockWebsocketCore.Enums;
 
-namespace RagnarockWebsocket.Data
+namespace RagnarockWebsocketCore.Data
 {
     internal struct HammerData
     {

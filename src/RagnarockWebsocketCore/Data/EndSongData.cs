@@ -1,4 +1,4 @@
-﻿namespace RagnarockWebsocket.Data
+﻿namespace RagnarockWebsocketCore.Data
 {
     /// <summary>
     /// Data received from the EndSong event.

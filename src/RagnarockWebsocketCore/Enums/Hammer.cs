@@ -1,4 +1,4 @@
-﻿namespace RagnarockWebsocket.Enums
+﻿namespace RagnarockWebsocketCore.Enums
 {
     /// <summary>
     /// List of all the known hammers in Ragnarock and their descriptions.

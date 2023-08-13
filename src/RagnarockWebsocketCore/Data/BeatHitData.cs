@@ -1,15 +1,15 @@
 ﻿using Newtonsoft.Json;
-using RagnarockWebsocket.Converter;
+using RagnarockWebsocketCore.Converter;
 
-namespace RagnarockWebsocket.Data
+namespace RagnarockWebsocketCore.Data
 {
     /// <summary>
-    /// Data received from the BeatMiss event.
+    /// Data received from the BeatHit event.
     /// </summary>
-    public struct BeatMissData
+    public struct BeatHitData
     {
         /// <summary>
-        /// Delta from the ideal timing. This is always 0 for BeatMiss.
+        /// Delta from the ideal timing, in seconds. Positive - too late, negative - too early.
         /// </summary>
         [JsonConverter(typeof(StringDoubleConverter))]
         public double delta;

@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
-using RagnarockWebsocket.Enums;
+using RagnarockWebsocketCore.Enums;
 
-namespace RagnarockWebsocket.Converter
+namespace RagnarockWebsocketCore.Converter
 {
     public sealed class RowersEnumConverter : JsonConverter
     {

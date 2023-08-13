@@ -1,5 +1,6 @@
 ﻿using RagnarockWebsocket;
 using RagnarockWebsocket.Enums;
+using RagnarockWebsocketCore.Enums;
 using Newtonsoft.Json.Linq;
 using System.Numerics;
 

@@ -1,4 +1,4 @@
-﻿namespace RagnarockWebsocket.Data
+﻿namespace RagnarockWebsocketCore.Data
 {
     internal struct CurrentSongData
     {

@@ -12,9 +12,10 @@
     <RepositoryUrl>https://github.com/Brollyy/RagnarockWebsocketUtil</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>NuGet package for handling communication with Ragnarock VR and Vikings on Tour through a dedicated Websocket.</Description>
-    <PackageReleaseNotes>0.1.3
-- Added support for the new hammers from patch 2.1.0.</PackageReleaseNotes>
-    <Version>0.1.3</Version>
+    <PackageReleaseNotes>0.2.0
+      - Refactored and split off core functionality from RagnarockWebsocket to allow for use outside of the dedicated Websocket in RagnaWS.
+    </PackageReleaseNotes>
+    <Version>0.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,6 +32,10 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="WatsonWebsocket" Version="4.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RagnarockWebsocketCore\RagnarockWebsocketCore.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace RagnarockWebsocket.Enums
+﻿namespace RagnarockWebsocketCore.Enums
 {
     /// <summary>
     /// Represents combo level triggered.

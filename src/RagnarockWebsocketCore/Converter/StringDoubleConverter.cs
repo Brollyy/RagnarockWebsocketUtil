@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Globalization;
 
-namespace RagnarockWebsocket.Converter
+namespace RagnarockWebsocketCore.Converter
 {
     public sealed class StringDoubleConverter : JsonConverter
     {

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace RagnarockWebsocket.Data
+namespace RagnarockWebsocketCore.Data
 {
     /// <summary>
     /// Data received from the StartSong event.
