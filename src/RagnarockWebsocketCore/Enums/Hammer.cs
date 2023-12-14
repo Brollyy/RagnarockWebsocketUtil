@@ -96,6 +96,10 @@
         /// <summary>
         /// Get silver medals on all the levels of all the songs from Volume 1.
         /// </summary>
-        MyShiny = 22
+        MyShiny = 22,
+        /// <summary>
+        /// Play all the songs in the Jonathan Young RAID pack.
+        /// </summary>
+        KrakenHammer = 23,
     };
 }

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net7.0;net6.0;netstandard2.1;netcoreapp3.1;net48</TargetFrameworks>
+    <TargetFrameworks>net8.0;net7.0;net6.0;netstandard2.1;netcoreapp3.1;net48</TargetFrameworks>
     <LangVersion>11.0</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -12,10 +12,11 @@
     <RepositoryUrl>https://github.com/Brollyy/RagnarockWebsocketUtil</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>NuGet package for handling communication with Ragnarock VR and Vikings on Tour through a dedicated Websocket.</Description>
-    <PackageReleaseNotes>0.2.0
-      - Refactored and split off core functionality from RagnarockWebsocket to allow for use outside of the dedicated Websocket in RagnaWS.
+    <PackageReleaseNotes>0.2.1
+      - Added new Kraken Hammer from Jonathan Young RAID.
+      - Added support for .NET 8.0.
     </PackageReleaseNotes>
-    <Version>0.2.0</Version>
+    <Version>0.2.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
