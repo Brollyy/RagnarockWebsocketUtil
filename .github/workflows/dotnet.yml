@@ -22,7 +22,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore ./src/RagnarockWebsocketUtil.sln
     - name: Build
-      run: dotnet build --no-restore ./src/RagnarockWebsocketUtil.sln
+      run: dotnet build --no-restore ./src/RagnarockWebsocketUtil.sln -c Release
     - name: Pack
       run: dotnet pack ./src/RagnarockWebsocket/RagnarockWebsocket.csproj -c Release
     - name: Prep packages
