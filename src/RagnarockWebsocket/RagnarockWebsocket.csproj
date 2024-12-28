@@ -1,5 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v17.0\TextTemplating\Microsoft.TextTemplating.targets" />
+  <PropertyGroup>
+    <TransformOnBuild>true</TransformOnBuild>
+  </PropertyGroup>
   <PropertyGroup>
     <TargetFrameworks>net8.0;net7.0;net6.0;netstandard2.1;netcoreapp3.1;net48</TargetFrameworks>
     <LangVersion>11.0</LangVersion>
@@ -12,11 +15,11 @@
     <RepositoryUrl>https://github.com/Brollyy/RagnarockWebsocketUtil</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>NuGet package for handling communication with Ragnarock VR and Vikings on Tour through a dedicated Websocket.</Description>
-    <PackageReleaseNotes>0.2.1
-      - Added new Kraken Hammer from Jonathan Young RAID.
-      - Added support for .NET 8.0.
-    </PackageReleaseNotes>
-    <Version>0.2.1</Version>
+    <!-- PackageReleaseNotes dynamically populated from RELEASE-NOTES.txt -->
+    <!-- Version dynamically populated from RELEASE-NOTES.txt -->
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
   </PropertyGroup>
 
   <ItemGroup>
@@ -37,6 +40,22 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RagnarockWebsocketCore\RagnarockWebsocketCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="AssemblyInfo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AssemblyInfo.txt</LastGenOutput>
+    </None>
+    <None Update="AssemblyInfo.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AssemblyInfo.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 
 </Project>

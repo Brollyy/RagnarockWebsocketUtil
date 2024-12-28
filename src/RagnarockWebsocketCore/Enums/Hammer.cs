@@ -101,5 +101,9 @@
         /// Play all the songs in the Jonathan Young RAID pack.
         /// </summary>
         KrakenHammer = 23,
+        /// <summary>
+        /// Only unlockable during Christmas event.
+        /// </summary>
+        ChristmasHammer = 24,
     };
 }

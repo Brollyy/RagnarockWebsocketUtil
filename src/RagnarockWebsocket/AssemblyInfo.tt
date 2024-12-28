@@ -1,0 +1,14 @@
+﻿<#@ template hostspecific="true" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.IO" #>
+<#
+ string myFile = File.ReadLines(this.Host.ResolvePath("RELEASE-NOTES.txt")).First();
+ int MajorNumber = Int32.Parse(myFile.Split('.')[0]);
+ int MinorNumber = Int32.Parse(myFile.Split('.')[1]);
+ int RevisionNumber = Int32.Parse(myFile.Split('.')[2]);
+#>
+using System.Reflection;
+[assembly: AssemblyVersion("<#= MajorNumber #>.<#= MinorNumber #>.<#= RevisionNumber #>")]
+[assembly: AssemblyFileVersion("<#= MajorNumber #>.<#= MinorNumber #>.<#= RevisionNumber #>")]

@@ -1,0 +1,18 @@
+﻿0.2.2
+- Added new Christmas Hammer
+
+0.2.1
+- Added new Kraken Hammer from Jonathan Young RAID.
+- Added support for .NET 8.0.
+
+0.1.3
+- Added support for the new hammers from patch 2.1.0.
+
+0.1.2
+- Added support for the new Sabaton Raid DLC hammer.
+
+0.1.1
+- Support for .NET 6, .NET Standard, .NET Core and .NET Framework 4.8 added.
+
+0.1.0
+- Support for the BETA version of the Websocket available in Ragnarock patch 1.8.

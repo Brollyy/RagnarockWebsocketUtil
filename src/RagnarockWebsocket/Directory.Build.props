@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <!-- Set PackageReleaseNotes early in the process as well -->
+    <PackageReleaseNotes>$([System.IO.File]::ReadAllText('$(MSBuildProjectDirectory)\RELEASE-NOTES.txt'))</PackageReleaseNotes>
+  </PropertyGroup>
+</Project>
