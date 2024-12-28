@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v17.0\TextTemplating\Microsoft.TextTemplating.targets" />
-  <PropertyGroup>
+  <Import Condition="'$(Configuration)' == 'Debug'" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v17.0\TextTemplating\Microsoft.TextTemplating.targets" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TransformOnBuild>true</TransformOnBuild>
   </PropertyGroup>
   <PropertyGroup>
