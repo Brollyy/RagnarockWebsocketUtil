@@ -23,8 +23,12 @@ jobs:
       run: dotnet restore ./src/RagnarockWebsocketUtil.sln
     - name: Build
       run: dotnet build --no-restore ./src/RagnarockWebsocketUtil.sln -c Release
+    - name: Read version
+      run: |
+        version=$(head -n 1 ./src/RagnarockWebsocket/RELEASE-NOTES.txt)
+        echo "PACKAGE_VERSION=$version" >> $GITHUB_ENV
     - name: Pack
-      run: dotnet pack ./src/RagnarockWebsocket/RagnarockWebsocket.csproj -c Release
+      run: dotnet pack ./src/RagnarockWebsocket/RagnarockWebsocket.csproj -c Release -p:Version=$PACKAGE_VERSION
     - name: Prep packages
       run: dotnet nuget add source --username Brollyy --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/Brollyy/index.json"
     - name: Publish to GitHub packages 
