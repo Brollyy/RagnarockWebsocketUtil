@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RagnarockWebsocketCore\RagnarockWebsocketCore.csproj" />
     <ProjectReference Include="..\RagnarockWebsocket\RagnarockWebsocket.csproj" />
   </ItemGroup>
 
