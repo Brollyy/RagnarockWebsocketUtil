@@ -1,3 +1,6 @@
+0.2.4
+- Added new Pirate Hammer.
+
 0.2.3
 - Fixed an issue with project dependencies being falsely picked up as NuGet dependencies.
 

@@ -105,5 +105,9 @@
         /// Only unlockable during Christmas event.
         /// </summary>
         ChristmasHammer = 24,
+        /// <summary>
+        /// Only unlockable in the Pirate skin pack.
+        /// </summary>
+        PirateHammer = 25,
     };
 }
